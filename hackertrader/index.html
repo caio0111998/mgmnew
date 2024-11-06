@@ -51,22 +51,24 @@
       margin: 5px 0 20px; 
     }
 
-  /* Estilo do Vídeo com Borda Neon */
+   /* Estilo do Vídeo com Borda Neon */
   .vsl-video-container { 
     width: 100%; 
     display: flex; 
     justify-content: center; 
     margin-top: 20px;
-    overflow: hidden; /* Impede que a borda ultrapasse a área do vídeo */
-    border-radius: 8px; /* Adiciona borda arredondada ao contêiner */
+    max-width: 960px; /* Define o tamanho máximo para o vídeo */
+    height: auto; /* Faz com que a altura seja proporcional */
+    overflow: hidden; /* Garante que nada ultrapasse a área do contêiner */
+    border-radius: 8px; /* Borda arredondada no contêiner */
+    box-sizing: border-box; /* Garante que a borda não aumente o tamanho total */
   }
   .vsl-video { 
     width: 100%; 
-    max-width: 960px;  /* A largura máxima do vídeo */
-    height: 540px;     /* A altura do vídeo */
-    border: 5px solid #8a2be2;
-    border-radius: 8px; /* Arredonda a borda do próprio vídeo */
-    box-shadow: 0 0 15px #8a2be2;
+    height: 100%; /* Faz com que a altura se ajuste automaticamente */
+    border: 5px solid #8a2be2; /* Borda do vídeo */
+    border-radius: 8px; /* Borda arredondada do vídeo */
+    box-sizing: border-box; /* Inclui a borda no cálculo de tamanho */
   }
 
     /* Botões de Compra - Verde Neon com Efeito de Piscar */
