@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>(1) Ganhe em DÓLAR com Mesas Proprietárias</title>
+  <title>Ganhe em DÓLAR com Mesas Proprietárias</title>
   <style>
+    /* Design Escuro e Moderno */
     body { 
       font-family: Arial, sans-serif; 
       background-color: #121212; 
@@ -44,6 +45,8 @@
       color: #ffffff; 
       margin: 5px 0 20px; 
     }
+
+    /* Estilo do Vídeo com Borda Neon */
     .vsl-video-container { 
       width: 100%; 
       display: flex; 
@@ -58,10 +61,12 @@
       border-radius: 8px;
       box-shadow: 0 0 15px #8a2be2;
     }
+
+    /* Botões de Compra - Verde Neon com Efeito de Piscar */
     .cta-button { 
       display: inline-block; 
       padding: 15px 30px; 
-      background-color: #39ff14;
+      background-color: #39ff14; 
       color: #000; 
       font-size: 18px; 
       font-weight: bold; 
@@ -75,6 +80,8 @@
       box-shadow: 0px 0px 15px #39ff14, 0px 0px 25px #39ff14, 0px 0px 35px #39ff14;
       transform: scale(1.05);
     }
+
+    /* Detalhes do Produto */
     .product-details { 
       margin-top: 20px; 
       padding: 0 10px;
@@ -92,6 +99,8 @@
       height: auto; 
       border-radius: 8px;
     }
+
+    /* FAQ */
     .faq { 
       margin-top: 40px; 
     }
@@ -119,6 +128,8 @@
       display: none; 
       margin: 5px 0 0; 
     }
+
+    /* Responsividade */
     @media (max-width: 600px) {
       .headline-large { font-size: 24px; }
       .cta-button { font-size: 16px; padding: 12px 24px; }
@@ -126,6 +137,7 @@
     }
   </style>
   <script>
+    // Função para mostrar ou ocultar a resposta ao clicar na pergunta
     function toggleAnswer(id) {
       var answer = document.getElementById(id);
       answer.style.display = answer.style.display === "none" ? "block" : "none";
@@ -133,43 +145,75 @@
   </script>
 </head>
 <body>
+
   <div class="container">
+    <!-- Headline Inicial -->
     <p class="headline-small">Os Gurus Não Querem que você saiba disso!</p>
     <h1 class="headline-large">Como ser APROVADO em QUALQUER Mesa Proprietária e Lucrar em Dólar até 2025</h1>
-    
+
     <!-- VSL Embed (Wistia) com Borda Neon -->
     <div class="vsl-video-container">
-      <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-        <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-          <div class="wistia_embed wistia_async_4hh88arj59 seo=false videoFoam=true vsl-video" style="height:100%;position:relative;width:100%"></div>
-        </div>
-      </div>
+      <iframe src="https://fast.wistia.net/embed/iframe/your-video-id" class="vsl-video" allowfullscreen></iframe>
     </div>
-    
     <a href="#purchase" class="cta-button">QUERO LUCRAR EM DÓLAR</a>
 
+    <!-- Detalhes do Produto -->
     <div class="product-details">
       <h2>Sobre o LDX - Lucro em Dólar Exponencial</h2>
       <p>O LDX é um software revolucionário com inteligência artificial, projetado para automatizar e garantir aprovação em qualquer mesa proprietária, incluindo as maiores como a FTMO, usando o MetaTrader.</p>
+      
+      <!-- Imagem de IA -->
       <div class="product-image-container">
         <img src="ldx.GIF" alt="GIF do LDX" class="product-image">
       </div>
+
+      <!-- Segundo Botão de Compra -->
       <a href="#purchase" class="cta-button">QUERO LUCRAR EM DÓLAR</a>
     </div>
 
+    <!-- FAQ Section -->
     <div class="faq">
       <h2>Perguntas Frequentes</h2>
+
       <div class="faq-item" onclick="toggleAnswer('answer1')">
         <h3>O LDX realmente funciona?</h3>
         <p id="answer1">Sim, nosso software é testado e aprovado, com mais de 2000 traders utilizando para aprovações rápidas e seguras em mesas proprietárias.</p>
       </div>
-      <!-- Adicione mais perguntas conforme necessário -->
+
+      <div class="faq-item" onclick="toggleAnswer('answer2')">
+        <h3>Ele funciona em qualquer mesa?</h3>
+        <p id="answer2">Sim, o LDX foi desenvolvido para funcionar em qualquer mesa que utilize o MetaTrader, garantindo flexibilidade para traders ao redor do mundo.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer3')">
+        <h3>O software foi testado?</h3>
+        <p id="answer3">Sim, o LDX já foi utilizado por mais de 2000 traders, com resultados comprovados e consistentes em diversas mesas proprietárias.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer4')">
+        <h3>O LDX é um robô HFT?</h3>
+        <p id="answer4">NÃO! Somos contra HFT, ele é um Expert Advisor exclusivo para aprovações em mesas.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer5')">
+        <h3>Tem limite de mesas que posso colocar?</h3>
+        <p id="answer5">Não! Para aprovação pode usar em quantas mesas quiser, só NUNCA pode usar para gestão da mesa.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer6')">
+        <h3>Vou aprender a como instalar e usar?</h3>
+        <p id="answer6">Sim, colocamos o passo a passo super didático e em vídeo.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer7')">
+        <h3>Vou receber algo além do LDX?</h3>
+        <p id="answer7">Sim, o acesso a Plano de Riqueza com Mesas Proprietárias + VLX - VISÃO DE LUCRO EXPONENCIAL, nosso software focado para conta pessoal, que faz de 15 a 25% ao mês.</p>
+      </div>
     </div>
-    
+
+    <!-- Terceiro Botão de Compra -->
     <a href="#purchase" class="cta-button">QUERO LUCRAR EM DÓLAR</a>
   </div>
-  
-  <script src="https://fast.wistia.com/embed/medias/4hh88arj59.jsonp" async></script>
-  <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+
 </body>
 </html>
