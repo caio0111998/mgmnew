@@ -57,13 +57,15 @@
     display: flex; 
     justify-content: center; 
     margin-top: 20px;
+    overflow: hidden; /* Impede que a borda ultrapasse a área do vídeo */
+    border-radius: 8px; /* Adiciona borda arredondada ao contêiner */
   }
   .vsl-video { 
     width: 100%; 
-    max-width: 960px;  /* Aumentei o valor máximo da largura */
-    height: 540px;     /* Defini uma altura fixa proporcional */
+    max-width: 960px;  /* A largura máxima do vídeo */
+    height: 540px;     /* A altura do vídeo */
     border: 5px solid #8a2be2;
-    border-radius: 8px;
+    border-radius: 8px; /* Arredonda a borda do próprio vídeo */
     box-shadow: 0 0 15px #8a2be2;
   }
 
