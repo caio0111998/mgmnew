@@ -51,24 +51,25 @@
       margin: 5px 0 20px; 
     }
 
-   /* Estilo do Vídeo com Borda Neon */
+  /* Estilo do Vídeo com Borda Neon */
   .vsl-video-container { 
     width: 100%; 
-    display: flex; 
-    justify-content: center; 
-    margin-top: 20px;
-    max-width: 960px; /* Define o tamanho máximo para o vídeo */
-    height: auto; /* Faz com que a altura seja proporcional */
-    overflow: hidden; /* Garante que nada ultrapasse a área do contêiner */
+    max-width: 960px; /* Define o tamanho máximo do contêiner */
+    height: 0;
+    padding-bottom: 56.25%; /* Proporção 16:9 (altura proporcional à largura) */
+    position: relative; /* Permite posicionar o vídeo dentro do contêiner */
     border-radius: 8px; /* Borda arredondada no contêiner */
-    box-sizing: border-box; /* Garante que a borda não aumente o tamanho total */
+    overflow: hidden; /* Garante que a borda não ultrapasse o vídeo */
+    border: 5px solid #8a2be2; /* Borda do contêiner */
   }
+
   .vsl-video { 
-    width: 100%; 
-    height: 100%; /* Faz com que a altura se ajuste automaticamente */
-    border: 5px solid #8a2be2; /* Borda do vídeo */
-    border-radius: 8px; /* Borda arredondada do vídeo */
-    box-sizing: border-box; /* Inclui a borda no cálculo de tamanho */
+    position: absolute; /* Posiciona o vídeo dentro do contêiner */
+    top: 0;
+    left: 0;
+    width: 100%; /* Faz com que o vídeo ocupe toda a largura */
+    height: 100%; /* Faz com que o vídeo ocupe toda a altura */
+    border-radius: 8px; /* Borda arredondada no vídeo */
   }
 
     /* Botões de Compra - Verde Neon com Efeito de Piscar */
