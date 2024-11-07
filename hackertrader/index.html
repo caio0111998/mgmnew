@@ -98,7 +98,28 @@
 
   <div class="container">
     <!-- Headline e Vídeo visíveis de imediato -->
-    <p class="headline-small">OS GURUS NÃO QUEREM QUE VOCE SAIBA DISSO!</p>
+    <p class="headline-small">
+  ESSE VÍDEO FICARÁ NO AR ATÉ A DATA: <span id="data-expiracao"></span>
+</p>
+
+<script>
+  // Função para definir a data de um dia depois
+  function definirDataExpiracao() {
+    const dataAtual = new Date();
+    dataAtual.setDate(dataAtual.getDate() + 1); // Adiciona um dia
+
+    // Formata a data para o formato DD/MM/AAAA
+    const dia = String(dataAtual.getDate()).padStart(2, '0');
+    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+    const ano = dataAtual.getFullYear();
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    // Insere a data formatada no span
+    document.getElementById('data-expiracao').textContent = dataFormatada;
+  }
+
+  // Chama a função assim que a página carrega
+  window.onload = definirDataExpiracao;
     <h1 class="headline-large">Como ser APROVADO em QUALQUER Mesa Proprietária e Lucrar em Dólar até 2025</h1>
 
     <!-- VSL Embed (Wistia) com Borda Neon -->
