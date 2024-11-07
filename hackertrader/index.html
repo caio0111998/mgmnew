@@ -75,8 +75,64 @@
     .cta-button, .product-details, .faq { 
       display: none;
     }
-  </style>
+    
+    /* Estilo para o botão verde neon */
+    .cta-button { 
+      background-color: #39FF14; 
+      color: black; 
+      padding: 15px 30px; 
+      border-radius: 5px; 
+      font-size: 20px;
+      text-decoration: none; 
+      display: inline-block; 
+      margin-top: 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.8); /* Neon Effect */
+    }
 
+    .cta-button:hover { 
+      background-color: #32cc11; 
+      transform: scale(1.1);
+    }
+    
+    /* FAQ */
+    .faq { 
+      margin-top: 40px; 
+    }
+    .faq h2 { 
+      font-size: 24px; 
+      color: #ffffff; 
+      text-align: center;
+    }
+    .faq-item { 
+      margin-bottom: 15px; 
+      cursor: pointer; 
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #1f1f1f;
+      text-align: left;
+    }
+    .faq-item h3 { 
+      font-size: 18px; 
+      color: #ffffff; 
+      margin: 5px 0; 
+    }
+    .faq-item p { 
+      font-size: 16px; 
+      color: #d3d3d3; 
+      display: none; 
+      margin: 5px 0 0; 
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .headline-large { font-size: 24px; }
+      .cta-button { font-size: 16px; padding: 12px 24px; }
+      .faq-item h3 { font-size: 16px; }
+    }
+
+  </style>
+  
   <script>
     // Função para mostrar os elementos ocultos após o tempo de espera
     function showContent() {
@@ -93,13 +149,22 @@
       hiddenElements.forEach(el => el.style.display = 'none');
     });
   </script>
+
+  <script>
+    // Função para mostrar ou ocultar a resposta ao clicar na pergunta
+    function toggleAnswer(id) {
+      var answer = document.getElementById(id);
+      answer.style.display = answer.style.display === "none" ? "block" : "none";
+    }
+  </script>
+
 </head>
 <body>
 
   <div class="container">
     <!-- Headline e Vídeo visíveis de imediato -->
     <p class="headline-small">
-  ESSE VÍDEO FICARÁ NO AR ATÉ A DATA: <span id="data-expiracao"></span></p>
+      ESSE VÍDEO FICARÁ NO AR ATÉ A DATA: <span id="data-expiracao"></span></p>
     <h1 class="headline-large">Como ser APROVADO em QUALQUER Mesa Proprietária e Lucrar em Dólar até 2025</h1>
 
     <!-- VSL Embed (Wistia) com Borda Neon -->
@@ -107,33 +172,41 @@
       <iframe src="https://fast.wistia.net/embed/iframe/4hh88arj59" class="vsl-video" allowfullscreen></iframe>
     </div>
 
-<script>
-  // Função para definir a data de um dia depois
-  function definirDataExpiracao() {
-    const dataAtual = new Date();
-    dataAtual.setDate(dataAtual.getDate() + 1); // Adiciona um dia
+    <script>
+      // Função para definir a data de um dia depois
+      function definirDataExpiracao() {
+        const dataAtual = new Date();
+        dataAtual.setDate(dataAtual.getDate() + 1); // Adiciona um dia
 
-    // Formata a data para o formato DD/MM/AAAA
-    const dia = String(dataAtual.getDate()).padStart(2, '0');
-    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
-    const ano = dataAtual.getFullYear();
-    const dataFormatada = `${dia}/${mes}/${ano}`;
+        // Formata a data para o formato DD/MM/AAAA
+        const dia = String(dataAtual.getDate()).padStart(2, '0');
+        const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+        const ano = dataAtual.getFullYear();
+        const dataFormatada = `${dia}/${mes}/${ano}`;
 
-    // Insere a data formatada no span
-    document.getElementById('data-expiracao').textContent = dataFormatada;
-  }
+        // Insere a data formatada no span
+        document.getElementById('data-expiracao').textContent = dataFormatada;
+      }
 
-  // Chama a função assim que a página carrega
-  window.onload = definirDataExpiracao;
-</script>
-    <!-- Conteúdo que aparece após o delay de 527 segundos -->
-    <div class="delayed-content product-details">
+      // Chama a função assim que a página carrega
+      window.onload = definirDataExpiracao;
+    </script>
+
+    <!-- Botão abaixo do Vídeo -->
+    <div class="delayed-content">
       <a href="https://pay.kirvano.com/cf157318-9206-47c8-ac96-f00f267a01a1" class="cta-button">QUERO LUCRAR EM DÓLAR</a>
+    </div>
+
+    <!-- Conteúdo sobre o LDX -->
+    <div class="delayed-content product-details">
       <h2>Sobre o LDX - Lucro em Dólar Exponencial</h2>
-      <p>O LDX é um software revolucionário com inteligência artificial...</p>
+      <p>O LDX é um software revolucionário com inteligência artificial programado para aprovar de forma AUTOMÁTICA em QUALQUER Mesa Prorietária de MetaTrader, como FTMO, Fundscap e etc...</p>
       <div class="product-image-container">
         <img src="img/ldx.GIF.gif" style="max-width: 350px;">
       </div>
+      
+      <!-- Botão abaixo do GIF -->
+      <a href="https://pay.kirvano.com/cf157318-9206-47c8-ac96-f00f267a01a1" class="cta-button">QUERO SER UM TRADER PATROCINADO</a>
     </div>
 
     <!-- FAQ Section, oculta inicialmente com a classe "delayed-content" -->
@@ -142,32 +215,32 @@
 
       <div class="faq-item" onclick="toggleAnswer('answer1')">
         <h3>O LDX realmente funciona?</h3>
-        <p id="answer1">Sim, nosso software é testado e aprovado, com mais de 2000 traders utilizando para aprovações rápidas e seguras em mesas proprietárias.</p>
+        <p id="answer1">Sim, o software foi testado por mais de 2000 traders e tem mostrado resultados consistentes.</p>
       </div>
 
       <div class="faq-item" onclick="toggleAnswer('answer2')">
         <h3>Ele funciona em qualquer mesa?</h3>
-        <p id="answer2">Sim, o LDX foi desenvolvido para funcionar em qualquer mesa que utilize o MetaTrader, garantindo flexibilidade para traders ao redor do mundo.</p>
+        <p id="answer2">Sim, o LDX funciona em qualquer mesa proprietária que utilize o MetaTrader.</p>
       </div>
 
       <div class="faq-item" onclick="toggleAnswer('answer3')">
         <h3>O software foi testado?</h3>
-        <p id="answer3">Sim, o LDX já foi utilizado por mais de 2000 traders, com resultados comprovados e consistentes em diversas mesas proprietárias.</p>
+        <p id="answer3">Sim, o LDX já foi utilizado por muitos traders com resultados comprovados.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer4')">
+        <h3>Como posso instalar o LDX?</h3>
+        <p id="answer4">A instalação é simples e você pode acompanhar o passo a passo diretamente no portal.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleAnswer('answer5')">
+        <h3>Posso usar o LDX em várias mesas?</h3>
+        <p id="answer5">Não, você pode usar o LDX para se aprovar em quantas mesas quiser!</p>
       </div>
 
       <div class="faq-item" onclick="toggleAnswer('answer4')">
         <h3>O LDX é um robô HFT?</h3>
-        <p id="answer4">NÃO! Somos contra HFT, ele é um Expert Advisor exclusivo para aprovações em mesas.</p>
-      </div>
-
-      <div class="faq-item" onclick="toggleAnswer('answer5')">
-        <h3>Tem limite de mesas que posso colocar?</h3>
-        <p id="answer5">Não! Para aprovação pode usar em quantas mesas quiser, só NUNCA pode usar para gestão da mesa.</p>
-      </div>
-
-      <div class="faq-item" onclick="toggleAnswer('answer6')">
-        <h3>Vou aprender a como instalar e usar?</h3>
-        <p id="answer6">Sim, colocamos o passo a passo super didático e em vídeo.</p>
+        <p id="answer6">NÃO! Somos contra HFT, ele é um Expert Advisor exclusivo para aprovações em mesas.</p>
       </div>
 
       <div class="faq-item" onclick="toggleAnswer('answer7')">
@@ -175,8 +248,6 @@
         <p id="answer7">Sim, o acesso ao Plano de Criação de Riqueza com Mesas Proprietárias + Robô VLX - Visão de Lucro Exponencial.</p>
       </div>
     </div>
-
   </div>
-
 </body>
 </html>
