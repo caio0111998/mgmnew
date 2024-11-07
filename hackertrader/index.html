@@ -10,7 +10,7 @@
   <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
 
   <style>
-    /* Design Escuro e Moderno */
+    /* Estilos e animações */
     body { 
       font-family: Arial, sans-serif; 
       background-color: #121212; 
@@ -51,113 +51,53 @@
       margin: 5px 0 20px; 
     }
 
-  /* Estilo do Vídeo com Borda Neon */
-  .vsl-video-container { 
-    width: 100%; 
-    max-width: 960px; /* Define o tamanho máximo do contêiner */
-    height: 0;
-    padding-bottom: 56.25%; /* Proporção 16:9 (altura proporcional à largura) */
-    position: relative; /* Permite posicionar o vídeo dentro do contêiner */
-    border-radius: 8px; /* Borda arredondada no contêiner */
-    overflow: hidden; /* Garante que a borda não ultrapasse o vídeo */
-    border: 5px solid #8a2be2; /* Borda do contêiner */
-  }
-
-  .vsl-video { 
-    position: absolute; /* Posiciona o vídeo dentro do contêiner */
-    top: 0;
-    left: 0;
-    width: 100%; /* Faz com que o vídeo ocupe toda a largura */
-    height: 100%; /* Faz com que o vídeo ocupe toda a altura */
-    border-radius: 8px; /* Borda arredondada no vídeo */
-  }
-
-    /* Botões de Compra - Verde Neon com Efeito de Piscar */
-    .cta-button { 
-      display: inline-block; 
-      padding: 15px 30px; 
-      background-color: #39ff14; 
-      color: #000; 
-      font-size: 18px; 
-      font-weight: bold; 
-      border-radius: 5px; 
-      text-decoration: none; 
-      margin-top: 20px;
-      box-shadow: 0px 0px 10px #39ff14, 0px 0px 20px #39ff14; 
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .cta-button:hover { 
-      box-shadow: 0px 0px 15px #39ff14, 0px 0px 25px #39ff14, 0px 0px 35px #39ff14;
-      transform: scale(1.05);
-    }
-
-    /* Detalhes do Produto */
-    .product-details { 
-      margin-top: 20px; 
-      padding: 0 10px;
-      text-align: center;
-    }
-    .product-image-container { 
+    /* Estilo do Vídeo com Borda Neon */
+    .vsl-video-container { 
       width: 100%; 
-      display: flex; 
-      justify-content: center; 
-      margin-top: 15px;
+      max-width: 960px;
+      height: 0;
+      padding-bottom: 56.25%;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 5px solid #8a2be2;
     }
-    .product-image { 
-      width: 100%; 
-      max-width: 200px; 
-      height: auto; 
+    .vsl-video { 
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 8px;
     }
 
-    /* FAQ */
-    .faq { 
-      margin-top: 40px; 
-    }
-    .faq h2 { 
-      font-size: 24px; 
-      color: #ffffff; 
-      text-align: center;
-    }
-    .faq-item { 
-      margin-bottom: 15px; 
-      cursor: pointer; 
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #1f1f1f;
-      text-align: left;
-    }
-    .faq-item h3 { 
-      font-size: 18px; 
-      color: #ffffff; 
-      margin: 5px 0; 
-    }
-    .faq-item p { 
-      font-size: 16px; 
-      color: #d3d3d3; 
-      display: none; 
-      margin: 5px 0 0; 
-    }
-
-    /* Responsividade */
-    @media (max-width: 600px) {
-      .headline-large { font-size: 24px; }
-      .cta-button { font-size: 16px; padding: 12px 24px; }
-      .faq-item h3 { font-size: 16px; }
+    /* Botões de Compra e Outros Elementos Ocultos Inicialmente */
+    .cta-button, .product-details, .faq { 
+      display: none;
     }
   </style>
+
   <script>
-    // Função para mostrar ou ocultar a resposta ao clicar na pergunta
-    function toggleAnswer(id) {
-      var answer = document.getElementById(id);
-      answer.style.display = answer.style.display === "none" ? "block" : "none";
+    // Função para mostrar os elementos ocultos após o tempo de espera
+    function showContent() {
+      const hiddenElements = document.querySelectorAll('.delayed-content');
+      hiddenElements.forEach(el => el.style.display = 'block');
     }
+
+    // Definir o atraso de 527 segundos (8 minutos e 47 segundos)
+    setTimeout(showContent, 527000);
+
+    // Esconde os elementos inicialmente
+    document.addEventListener('DOMContentLoaded', function() {
+      const hiddenElements = document.querySelectorAll('.delayed-content');
+      hiddenElements.forEach(el => el.style.display = 'none');
+    });
   </script>
 </head>
 <body>
 
   <div class="container">
-    <!-- Headline Inicial -->
+    <!-- Headline e Vídeo visíveis de imediato -->
     <p class="headline-small">OS GURUS NÃO QUEREM QUE VOCE SAIBA DISSO!</p>
     <h1 class="headline-large">Como ser APROVADO em QUALQUER Mesa Proprietária e Lucrar em Dólar até 2025</h1>
 
@@ -165,24 +105,19 @@
     <div class="vsl-video-container">
       <iframe src="https://fast.wistia.net/embed/iframe/4hh88arj59" class="vsl-video" allowfullscreen></iframe>
     </div>
-    <a href="https://pay.kirvano.com/cf157318-9206-47c8-ac96-f00f267a01a1" class="cta-button">QUERO LUCRAR EM DÓLAR</a>
 
-    <!-- Detalhes do Produto -->
-    <div class="product-details">
-      <h2>Sobre o LDX - Lucro em Dólar Exponencial</h2>
-      <p>O LDX é um software revolucionário com inteligência artificial, projetado para automatizar e garantir aprovação em qualquer mesa proprietária, incluindo as maiores como a FTMO, usando o MetaTrader.</p>
-      
-      <!-- Imagem de IA -->
-      <div class="product-image-container">
-        <img class="img-fluid mb-4" src="img/ldx.GIF.gif" style="max-width: 350px;">
-      </div>
-
-      <!-- Segundo Botão de Compra -->
+    <!-- Conteúdo que aparece após o delay de 527 segundos -->
+    <div class="delayed-content product-details">
       <a href="https://pay.kirvano.com/cf157318-9206-47c8-ac96-f00f267a01a1" class="cta-button">QUERO LUCRAR EM DÓLAR</a>
+      <h2>Sobre o LDX - Lucro em Dólar Exponencial</h2>
+      <p>O LDX é um software revolucionário com inteligência artificial...</p>
+      <div class="product-image-container">
+        <img src="img/ldx.GIF.gif" style="max-width: 350px;">
+      </div>
     </div>
 
-    <!-- FAQ Section -->
-    <div class="faq">
+    <!-- FAQ Section, oculta inicialmente com a classe "delayed-content" -->
+    <div class="delayed-content faq">
       <h2>Perguntas Frequentes</h2>
 
       <div class="faq-item" onclick="toggleAnswer('answer1')">
@@ -220,6 +155,7 @@
         <p id="answer7">Sim, o acesso ao Plano de Criação de Riqueza com Mesas Proprietárias + Robô VLX - Visão de Lucro Exponencial.</p>
       </div>
     </div>
+
   </div>
 
 </body>
