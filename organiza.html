@@ -396,9 +396,9 @@
     <div class="section-head">
       <div>
         <h3>Modelo 2 • Venda direta</h3>
-        <p>O distribuidor define a mensalidade ao cliente dentro do teto comercial. O repasse é calculado sobre a diferença entre o preço vendido e o valor-base da Organiza, com ajuste proporcional acima de R$ 179,90.</p>
+        <p>O distribuidor define a mensalidade ao cliente dentro do teto comercial. O repasse é calculado sobre a diferença entre a mensalidade negociada e um dos dois valores-base fixos da Organiza.</p>
       </div>
-      <span class="pill">Cálculo proporcional</span>
+      <span class="pill">2 valores-base fixos</span>
     </div>
 
     <div class="table-wrap">
@@ -406,8 +406,8 @@
         <thead><tr><th>Base comercial</th><th>Valor-base Organiza</th><th>Regra aplicada</th></tr></thead>
         <tbody>
           <tr><td><strong>Até R$ 179,90</strong></td><td class="ticket">R$ 109,90</td><td>Base fixa até o limite da primeira faixa.</td></tr>
-          <tr><td><strong>Acima de R$ 179,90</strong></td><td class="ticket">Proporcional</td><td>O valor-base cresce proporcionalmente entre R$ 109,90 e R$ 139,90.</td></tr>
-          <tr><td><strong>R$ 300,00</strong><div class="subtle">Mensalidade máxima</div></td><td class="ticket">R$ 139,90</td><td>Teto da venda direta.</td></tr>
+          <tr><td><strong>Acima de R$ 179,90</strong></td><td class="ticket">R$ 139,90</td><td>Base fixa para qualquer mensalidade acima de R$ 179,90, até o teto de R$ 300,00.</td></tr>
+          <tr><td><strong>R$ 300,00</strong><div class="subtle">Mensalidade máxima</div></td><td class="ticket">R$ 139,90</td><td>Teto comercial. O valor-base permanece R$ 139,90.</td></tr>
         </tbody>
       </table>
     </div>
@@ -418,7 +418,7 @@
         <div class="field">
           <label for="m2Price">Mensalidade negociada com o cliente</label>
           <input id="m2Price" type="text" inputmode="decimal" value="179,90" placeholder="Ex.: 225,00" autocomplete="off" aria-describedby="m2PriceHelp" />
-          <div class="helper" id="m2PriceHelp">Acima de R$ 179,90, o valor-base é ajustado proporcionalmente. <strong>Teto permitido: R$ 300,00.</strong></div>
+          <div class="helper" id="m2PriceHelp">Até R$ 179,90 aplica-se base de R$ 109,90. Acima de R$ 179,90 aplica-se base fixa de R$ 139,90. <strong>Teto permitido: R$ 300,00.</strong></div>
         </div>
         <div class="field">
           <label for="m2Qty">Quantidade de CNPJs</label>
@@ -444,7 +444,7 @@
   <section class="conditions">
     <div class="note-card">
       <h4>Condições da simulação</h4>
-      <p>Os exemplos de repasse usam <strong>15% como referência estimada de imposto no Simples Nacional</strong>. A alíquota efetiva pode variar conforme faturamento acumulado, faixa e período de apuração. No Modelo 1, o percentual muda conforme o preço informado. No Modelo 2, o repasse é calculado sobre a diferença entre o preço vendido e o valor-base aplicável; acima de R$ 179,90, esse valor-base cresce proporcionalmente até R$ 139,90 no teto de R$ 300,00. A implantação não gera repasse. As projeções de 6 e 12 meses pressupõem a permanência da mesma quantidade de CNPJs ativos.</p>
+      <p>Os exemplos de repasse usam <strong>15% como referência estimada de imposto no Simples Nacional</strong>. A alíquota efetiva pode variar conforme faturamento acumulado, faixa e período de apuração. No Modelo 1, o percentual muda conforme o preço informado. No Modelo 2, existem somente dois valores-base da Organiza: <strong>R$ 109,90 até mensalidades de R$ 179,90</strong> e <strong>R$ 139,90 para mensalidades acima de R$ 179,90</strong>, respeitado o teto de R$ 300,00. O repasse varia conforme a mensalidade negociada, mas o valor-base não é interpolado. A implantação não gera repasse. As projeções de 6 e 12 meses pressupõem a permanência da mesma quantidade de CNPJs ativos.</p>
     </div>
     <div class="cta-card">
       <h4>Próximo passo</h4>
@@ -567,7 +567,7 @@
       const FIRST_LIMIT = 179.90;
       const MAX_PRICE = 300.00;
       const BASE_FIRST = 109.90;
-      const BASE_MAX = 139.90;
+      const BASE_SECOND = 139.90;
       const wasCapped = rawPrice > MAX_PRICE;
       if (wasCapped) {
         rawPrice = MAX_PRICE;
@@ -581,9 +581,8 @@
         base = BASE_FIRST;
         rule = 'Até R$ 179,90 • base R$ 109,90';
       } else {
-        const progress = (price - FIRST_LIMIT) / (MAX_PRICE - FIRST_LIMIT);
-        base = BASE_FIRST + progress * (BASE_MAX - BASE_FIRST);
-        rule = 'Acima de R$ 179,90 • base proporcional';
+        base = BASE_SECOND;
+        rule = 'Acima de R$ 179,90 • base R$ 139,90';
       }
 
       base = round2(base);
@@ -603,7 +602,7 @@
       } else if (price <= BASE_FIRST) {
         m2Status.textContent='Neste valor não há diferença positiva para repasse. A implantação permanece sem repasse.';
       } else if (price > FIRST_LIMIT) {
-        m2Status.textContent='Valor-base ajustado proporcionalmente entre R$ 109,90 e R$ 139,90. Implantação sem repasse.';
+        m2Status.textContent='Base fixa de R$ 139,90 aplicada. O repasse varia conforme a mensalidade negociada. Implantação sem repasse.';
       } else {
         m2Status.textContent='Base de R$ 109,90 aplicada. Implantação sem repasse.';
       }
