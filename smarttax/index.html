@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartTax | Organiza</title>
+<meta name="description" content="Erros no cadastro de produtos podem estar tirando lucro do seu posto. Veja como o SmartTax da Organiza analisa e sugere os dados tributários direto no seu ERP.">
+<meta property="og:title" content="O lucro do seu posto pode estar escapando no cadastro de produtos">
+<meta property="og:description" content="Veja como o SmartTax da Organiza analisa e sugere os dados tributários do cadastro de produtos direto no seu ERP.">
+<meta property="og:image" content="organiza-thumbnail.jpg">
+<meta name="theme-color" content="#CF3467">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep: #1B2333;
+  --radius: 22px;
+  --wrap: 1120px;
+  --heading: "Poppins", "Segoe UI", Arial, sans-serif;
+  --body: "Inter", "Segoe UI", Arial, sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+/* A cor da página muda conforme a seção em foco. Tons vindos de organiza.site. */
+body[data-theme="pink"]   { --bg: #CF3467; --fg: #FFFFFF; --muted: #FFFFFF; --accent: #1B2333; --card: rgba(27,35,51,.2); --line: rgba(255,255,255,.34); --btn: #FFFFFF; --btn-fg: #B02A58; --logo: #FFFFFF; --logo-mark: #FFFFFF; }
+body[data-theme="navy"]   { --bg: #1B2333; --fg: #FFFFFF; --muted: #C4CADB; --accent: #FF7DA5; --card: #283247; --line: rgba(255,255,255,.18); --btn: #CF3467; --btn-fg: #FFFFFF; --logo: #FFFFFF; --logo-mark: #DD3A6D; }
+body[data-theme="purple"] { --bg: #452669; --fg: #FFFFFF; --muted: #E0D6EE; --accent: #FF9CBA; --card: #5A3580; --line: rgba(255,255,255,.22); --btn: #FFFFFF; --btn-fg: #452669; --logo: #FFFFFF; --logo-mark: #FF9CBA; }
+body[data-theme="lilac"]  { --bg: #EDEFFF; --fg: #2B3448; --muted: #545D72; --accent: #BE2F5E; --card: #FFFFFF; --line: #D6D9F0; --btn: #CF3467; --btn-fg: #FFFFFF; --logo: #2B3448; --logo-mark: #DD3A6D; }
+body[data-theme="white"]  { --bg: #FFFFFF; --fg: #2B3448; --muted: #545D72; --accent: #BE2F5E; --card: #F3F4FE; --line: #DADBE8; --btn: #CF3467; --btn-fg: #FFFFFF; --logo: #2B3448; --logo-mark: #DD3A6D; }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.6 var(--body); transition: background-color .7s var(--ease), color .5s var(--ease); overflow-x: clip; }
+img, video { display: block; max-width: 100%; }
+h1, h2, h3 { margin: 0; font-family: var(--heading); line-height: 1.14; letter-spacing: -.015em; }
+h2 { font-size: clamp(30px, 4.6vw, 50px); font-weight: 700; }
+h3 { font-size: 20px; font-weight: 600; }
+p { margin: 0; }
+em { color: var(--accent); font-style: normal; transition: color .5s; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; border-radius: 8px; }
+.wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+section { padding-block: clamp(72px, 11vw, 136px); }
+.head { max-width: 760px; margin-bottom: clamp(32px, 5vw, 52px); }
+.head p { margin-top: 16px; color: var(--muted); font-size: clamp(17px, 2vw, 20px); transition: color .5s; }
+.center { margin-inline: auto; text-align: center; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 14px 34px; border: 0; border-radius: 999px; background: var(--btn); color: var(--btn-fg);
+  font: 700 16px/1.2 var(--heading); letter-spacing: .02em; text-align: center; text-decoration: none; cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s, background-color .5s, color .5s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,.24); }
+.btn:active { transform: translateY(0); }
+.btn-line { border: 2px solid var(--line); background: none; color: var(--fg); font-weight: 600; }
+
+/* barra superior */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--bg); transition: background-color .7s var(--ease); }
+.bar-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 68px; }
+.logo { display: block; width: 136px; height: 31px; }
+.l { fill: var(--logo); transition: fill .5s; }
+.m { fill: var(--logo-mark); transition: fill .5s; }
+.nav { display: flex; align-items: center; gap: 26px; font-size: 15px; font-weight: 500; }
+.nav a:not(.btn) { padding: 6px 0; text-decoration: none; color: var(--fg); opacity: .85; transition: opacity .2s; }
+.nav a:not(.btn):hover { opacity: 1; }
+.nav .btn { min-height: 44px; padding: 8px 20px; font-size: 14px; }
+.progress { height: 3px; background: var(--line); }
+.progress i { display: block; height: 100%; width: 100%; background: var(--fg); transform: scaleX(var(--p, 0)); transform-origin: left; }
+
+/* hero */
+.hero { padding-block: clamp(36px, 5vw, 60px) clamp(64px, 9vw, 104px); text-align: center; }
+.eyebrow { display: inline-block; margin-bottom: 18px; padding: 7px 16px; border-radius: 999px; background: var(--card); font: 600 14px/1.3 var(--heading); }
+h1 { max-width: 900px; margin-inline: auto; font-size: clamp(34px, 5.6vw, 62px); font-weight: 700; }
+.lead { max-width: 640px; margin: 18px auto 0; color: var(--muted); font-size: clamp(17px, 2vw, 21px); }
+.player { position: relative; max-width: 940px; margin: clamp(28px, 4vw, 42px) auto 0; overflow: hidden; border-radius: var(--radius); background: #000; box-shadow: 0 30px 70px rgba(60, 10, 35, .45); aspect-ratio: 16 / 9; }
+.player video { width: 100%; height: 100%; }
+.play { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; padding: 0; border: 0; background: rgba(27, 35, 51, .12); cursor: pointer; transition: background-color .25s; }
+.play:hover { background: rgba(27, 35, 51, .28); }
+.play span { display: flex; align-items: center; gap: 12px; padding: 14px 26px 14px 20px; border-radius: 999px; background: #fff; color: #B02A58; font: 700 clamp(15px, 2vw, 18px)/1 var(--heading); box-shadow: 0 10px 30px rgba(0,0,0,.3); transition: transform .25s var(--ease); }
+.play:hover span { transform: scale(1.06); }
+.play svg { width: 22px; height: 22px; fill: currentColor; }
+.player-end { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 16px; background: rgba(27, 35, 51, .94); color: #fff; }
+.player-end.show { display: flex; }
+.player-end p { font: 600 clamp(18px, 3vw, 28px)/1.25 var(--heading); }
+.player-end .btn { background: #CF3467; color: #fff; }
+.replay { padding: 8px 14px; border: 0; background: none; color: #C4CADB; font-size: 15px; text-decoration: underline; cursor: pointer; }
+.cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 30px; }
+.hint { margin-top: 14px; color: var(--muted); font-size: 15px; }
+
+/* prova */
+.proof { text-align: center; }
+.big { display: block; color: var(--accent); font: 700 clamp(92px, 21vw, 230px)/.95 var(--heading); letter-spacing: -.03em; font-variant-numeric: tabular-nums; transition: color .5s; }
+.proof h2 { max-width: 780px; margin: 18px auto 0; font-size: clamp(23px, 3.4vw, 36px); font-weight: 600; }
+.meter { position: relative; max-width: 760px; height: 14px; margin: 34px auto 0; overflow: hidden; border-radius: 99px; background: var(--card); }
+.meter i { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 99px; background: linear-gradient(90deg, #DD3A6D, #FF7DA5); transition: width 1.8s var(--ease); }
+.meter.on i { width: 99.95%; }
+.meter-note { display: flex; justify-content: space-between; gap: 16px; max-width: 760px; margin: 10px auto 0; color: var(--muted); font-size: 15px; }
+.source { max-width: 640px; margin: 22px auto 0; color: var(--muted); font-size: 14px; }
+
+/* simulador */
+.sim { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; }
+.panel { padding: clamp(22px, 3.4vw, 36px); border-radius: var(--radius); background: var(--card); transition: background-color .5s; }
+.presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.chip { min-height: 44px; padding: 8px 16px; border: 2px solid var(--line); border-radius: 999px; background: none; font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
+.chip:hover { border-color: var(--fg); }
+.chip[aria-pressed="true"] { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+.field + .field { margin-top: 24px; }
+.field label { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 500; }
+.field output { font: 700 22px var(--heading); font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; height: 44px; margin: 2px 0 0; background: none; cursor: pointer; accent-color: #FF9CBA; }
+.result { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.result small { color: var(--muted); font-size: 15px; }
+.result strong { display: block; margin: 6px 0 10px; color: var(--accent); font: 700 clamp(44px, 6.6vw, 72px)/1.05 var(--heading); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.result .btn { margin-top: 22px; }
+.disclaimer { margin-top: 16px; color: var(--muted); font-size: 14px; }
+
+/* smarttax rodando */
+.demo { display: grid; grid-template-columns: 1.55fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+.window { overflow: hidden; border-radius: 16px; background: var(--navy-deep); box-shadow: 0 26px 60px rgba(43, 52, 72, .28); }
+.window-top { display: flex; align-items: center; gap: 7px; height: 36px; padding-inline: 14px; color: #C4CADB; font-size: 13px; }
+.window-top i { width: 11px; height: 11px; border-radius: 50%; background: #DD3A6D; }
+.window-top i:nth-child(2) { background: #FF9CBA; }
+.window-top i:nth-child(3) { background: #EDEFFF; margin-right: 8px; }
+.window img { width: 100%; height: auto; }
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { position: relative; padding: 0 0 26px 58px; counter-increment: s; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #CF3467; color: #fff; font: 700 18px var(--heading); }
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 20px; top: 46px; bottom: 4px; width: 2px; background: var(--line); }
+.steps p { margin-top: 4px; color: var(--muted); }
+
+/* abas */
+.switch { display: inline-flex; gap: 4px; margin-bottom: 28px; padding: 5px; border-radius: 999px; background: var(--card); transition: background-color .5s; }
+.switch button { min-height: 46px; padding: 8px 24px; border: 0; border-radius: 999px; background: none; font: 600 15px var(--heading); cursor: pointer; transition: background-color .25s, color .25s; }
+.switch button[aria-selected="true"] { background: #CF3467; color: #fff; }
+body[data-theme="pink"] .switch button[aria-selected="true"] { background: #fff; color: #B02A58; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.cards li { padding: 24px; border-radius: 18px; background: var(--card); transition: transform .25s var(--ease), background-color .5s; }
+.cards li:hover { transform: translateY(-4px); }
+.cards p { margin-top: 8px; color: var(--muted); }
+.cards.pop li { animation: pop .42s var(--ease) both; }
+.cards.pop li:nth-child(2) { animation-delay: .04s; } .cards.pop li:nth-child(3) { animation-delay: .08s; } .cards.pop li:nth-child(4) { animation-delay: .12s; } .cards.pop li:nth-child(5) { animation-delay: .16s; } .cards.pop li:nth-child(6) { animation-delay: .2s; }
+@keyframes pop { from { opacity: 0; transform: translateY(14px); } }
+.tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.tags li { padding: 12px 18px; border-radius: 14px; background: var(--card); font-weight: 500; }
+.tags.pop li { animation: pop .38s var(--ease) both; }
+
+/* faq */
+.faq { max-width: 800px; margin-inline: auto; }
+details { margin-bottom: 10px; border-radius: 16px; background: var(--card); transition: background-color .5s; }
+summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 14px 22px; font: 600 18px/1.35 var(--heading); cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--accent); font-size: 28px; line-height: 1; transition: transform .25s var(--ease); }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 22px 20px; color: var(--muted); }
+
+.final { text-align: center; }
+.final p { max-width: 560px; margin: 16px auto 30px; color: var(--muted); font-size: 19px; }
+footer { padding-block: 34px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 32px; }
+footer a { color: var(--fg); }
+
+.sticky { position: fixed; inset: auto 0 0; z-index: 15; display: none; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--navy-deep); box-shadow: 0 -6px 20px rgba(0,0,0,.25); }
+.sticky .btn { width: 100%; min-height: 50px; background: #CF3467; color: #fff; }
+
+/* entrada ao rolar: só com JS ativo */
+.js [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.js [data-reveal].in { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .nav { display: none; }
+  .bar-in { min-height: 58px; }
+  h1 { font-size: clamp(29px, 8.2vw, 40px); }
+  .sim, .demo { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .cta-row .btn { width: 100%; }
+  .switch { display: flex; }
+  .switch button { flex: 1; padding-inline: 10px; }
+  body.show-sticky .sticky { display: block; }
+  body { padding-bottom: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-delay: 0s !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body data-theme="pink">
+<script>document.documentElement.classList.add("js")</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 174 39"><path d="M160.986 27.7733C158.575 27.7733 157.35 25.1299 157.35 19.8042C157.35 14.2861 158.575 11.528 161.062 11.528C163.244 11.528 164.889 13.4814 164.889 16.395V22.1036C164.889 25.437 163.281 27.7733 160.984 27.7733H160.986ZM173.348 25.781C172.927 27.0075 172.391 27.6197 171.818 27.6197C171.168 27.6197 170.822 27.0444 170.822 25.8957V9.49683C169.675 10.1091 167.646 10.7991 164.699 11.528L164.737 12.1402C163.551 10.3773 161.714 9.49683 159.303 9.49683C156.852 9.49683 154.862 10.4551 153.332 12.3327C151.839 14.2103 151.074 16.7001 151.074 19.8431C151.074 22.9471 151.802 25.3592 153.257 27.161C154.711 28.924 156.625 29.8044 158.998 29.8044C162.099 29.8044 164.279 28.0804 165.198 25.5128C165.465 27.9657 166.881 29.8044 169.485 29.8044C171.743 29.8044 173.579 28.5391 174.001 25.9734L173.35 25.781H173.348Z" class="l"></path><path d="M116.776 25.2446C116.776 28.1173 118.23 29.8044 121.101 29.8044C123.589 29.8044 125.427 28.578 125.886 25.9734L125.235 25.781C124.814 27.0075 124.278 27.6197 123.703 27.6197C123.053 27.6197 122.707 27.0444 122.707 25.8957V9.49684L114.708 10.0722V10.801C116.277 10.9157 116.774 11.184 116.774 12.1422V25.2465L116.776 25.2446ZM119.531 0C121.513 0 123.119 1.60743 123.119 3.59193C123.119 5.57643 121.513 7.18385 119.531 7.18385C117.548 7.18385 115.943 5.57643 115.943 3.59193C115.943 1.60743 117.548 0 119.531 0Z" class="l"></path><path d="M112.947 25.781C112.525 27.0075 111.989 27.6197 111.415 27.6197C110.764 27.6197 110.421 27.0444 110.421 25.8957V15.1666C110.421 13.2132 109.846 11.7573 108.737 10.8749C107.627 9.95554 106.25 9.49489 104.679 9.49489C101.656 9.49489 99.1301 11.1801 98.1729 13.7477L98.3651 9.49489L90.4434 10.0702V10.7991C91.9734 10.9138 92.4723 11.182 92.4723 12.1402V27.0833C92.4723 28.1562 92.0898 28.3855 90.4434 28.5002V29.2291H100.318V28.5002C98.8253 28.3855 98.4428 28.1562 98.4428 27.0833V16.5466C98.4428 13.9032 100.012 12.1791 101.811 12.1791C103.341 12.1791 104.452 13.3667 104.452 15.9343V25.2446C104.452 28.1173 105.945 29.8044 108.815 29.8044C111.265 29.8044 113.102 28.578 113.56 25.9734L112.949 25.781H112.947Z" class="l"></path><path d="M75.9376 27.7733C73.5261 27.7733 72.3009 25.1299 72.3009 19.8042C72.3009 14.2861 73.5261 11.528 76.0133 11.528C78.1957 11.528 79.8402 13.4814 79.8402 16.395V22.1036C79.8402 25.437 78.2326 27.7733 75.9356 27.7733H75.9376ZM88.2998 25.781C87.8785 27.0075 87.3426 27.6197 86.7698 27.6197C86.1194 27.6197 85.7757 27.0444 85.7757 25.8957V9.49683C84.6282 10.1091 82.5993 10.7991 79.6519 11.528L79.6907 12.1402C78.5044 10.3773 76.6676 9.49683 74.2561 9.49683C71.8058 9.49683 69.8157 10.4551 68.2857 12.3327C66.7926 14.2103 66.0276 16.7001 66.0276 19.8431C66.0276 22.9471 66.7557 25.3592 68.21 27.161C69.6642 28.924 71.5787 29.8044 73.9513 29.8044C77.0521 29.8044 79.2325 28.0804 80.1509 25.5128C80.4188 27.9657 81.8343 29.8044 84.438 29.8044C86.6961 29.8044 88.5328 28.5391 88.9542 25.9734L88.3037 25.781H88.2998Z" class="l"></path><path d="M51.9761 27.7733C49.5647 27.7733 48.3395 25.1299 48.3395 19.8042C48.3395 14.2861 49.5647 11.528 52.0519 11.528C54.2342 11.528 55.8788 13.4814 55.8788 16.395V22.1036C55.8788 25.437 54.2711 27.7733 51.9742 27.7733H51.9761ZM55.7662 12.1791C54.541 10.3773 52.7042 9.49683 50.2928 9.49683C47.8424 9.49683 45.8523 10.4551 44.3223 12.3327C42.8292 14.2103 42.0642 16.7001 42.0642 19.8431C42.0642 22.9471 42.7923 25.3592 44.2466 27.161C45.7009 28.9239 47.6153 29.8044 49.9879 29.8044C52.7819 29.8044 54.7332 28.6168 55.8827 26.2417V29.1533C55.8827 34.8619 54.8497 37.8882 51.749 37.8882C49.2987 37.8882 48.0754 35.9717 48.0754 32.1796C45.2038 32.1796 43.2913 33.2525 43.2913 35.0524C43.2913 36.24 44.0563 37.1982 45.5494 37.9251C47.0425 38.654 48.9181 38.9981 51.1374 38.9981C55.2711 38.9981 58.1408 37.6958 59.6727 35.2817C61.2046 32.8677 61.8162 30.0707 61.8162 26.2397V9.49683C60.6687 10.1091 58.6398 10.7991 55.6924 11.528L55.7681 12.1791H55.7662Z" class="l"></path><path d="M36.4006 9.49683C33.6823 9.49683 31.6553 11.4891 30.8883 14.669L31.0806 9.49683L23.1957 10.0722V10.801C24.7276 10.9157 25.2247 11.184 25.2247 12.1422V27.0852C25.2247 28.1581 24.8422 28.3875 23.1957 28.5022V29.231H34.8318V28.5022C31.9621 28.3875 31.1951 28.1193 31.1951 27.0852V18.8868C31.1951 14.7098 32.2281 12.7953 33.76 12.7953C35.0609 12.7953 35.7113 14.2511 35.7113 17.1258C36.8588 17.1258 37.8937 16.8187 38.849 16.1676C39.8062 15.5164 40.2644 14.5193 40.2644 13.1412C40.2644 10.8419 38.6956 9.50072 36.3986 9.50072L36.4006 9.49683Z" class="l"></path><path d="M7.19684 26.5079C6.58523 25.0133 6.27845 22.7139 6.27845 19.6118C6.27845 16.5077 6.58523 14.2472 7.19684 12.7914C7.80845 11.2967 8.84332 10.5697 10.2588 10.5697C11.6742 10.5697 12.7091 11.2986 13.3207 12.7914C13.9323 14.2472 14.2391 16.5077 14.2391 19.6118C14.2391 22.7158 13.9323 25.0133 13.3207 26.5079C12.7091 28.0026 11.6742 28.7296 10.2588 28.7296C8.84332 28.7296 7.80845 28.0007 7.19684 26.5079ZM17.6078 27.0444C19.5591 25.1668 20.5163 22.7139 20.5163 19.6118C20.5163 16.5077 19.5591 14.0567 17.6078 12.2549C15.6933 10.4162 13.245 9.49683 10.2588 9.49683C7.27256 9.49683 4.82419 10.4162 2.87092 12.2549C0.956494 14.0567 0.0012207 16.5077 0.0012207 19.6118C0.0012207 22.7158 0.958436 25.1668 2.87092 27.0444C4.82225 28.8831 7.27256 29.8025 10.2588 29.8025C13.245 29.8025 15.6933 28.8831 17.6078 27.0444Z" class="l"></path><path d="M130.478 15.773C132.38 15.773 133.922 14.2292 133.922 12.3249C133.922 10.4206 132.38 8.8768 130.478 8.8768C128.575 8.8768 127.033 10.4206 127.033 12.3249C127.033 14.2292 128.575 15.773 130.478 15.773Z" class="m"></path><path d="M145.729 29.855C147.631 29.855 149.174 28.3112 149.174 26.4069C149.174 24.5025 147.631 22.9588 145.729 22.9588C143.827 22.9588 142.285 24.5025 142.285 26.4069C142.285 28.3112 143.827 29.855 145.729 29.855Z" class="m"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M146.381 8.8768L136.003 8.89624L136.011 9.66982C138.287 9.66982 140.18 11.0285 138.382 14.2258L129.825 29.8472L140.259 29.855L140.252 29.0814C137.976 29.0814 136.085 28.4614 137.883 25.2659L146.383 8.87874L146.381 8.8768Z" class="m"></path></symbol></svg>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <a href="#top" aria-label="Organiza, ir para o topo"><svg class="logo" role="img" aria-hidden="true"><use href="#logo"/></svg></a>
+    <nav class="nav" aria-label="Seções da página">
+      <a href="#simulador">Simulador</a>
+      <a href="#smarttax">SmartTax</a>
+      <a href="#comparar">Comparar</a>
+      <a href="#perguntas">Perguntas</a>
+      <a class="btn" data-wa href="#">Falar com um especialista</a>
+    </nav>
+  </div>
+  <div class="progress"><i id="progress"></i></div>
+</div>
+
+<main id="top">
+  <section class="hero" data-theme="pink">
+    <div class="wrap">
+      <span class="eyebrow">Para postos de combustíveis e conveniências</span>
+      <h1>O lucro do seu posto pode estar escapando <em>no cadastro de produtos</em></h1>
+      <p class="lead">Veja em menos de 3 minutos como o SmartTax da Organiza ajuda a corrigir isso.</p>
+      <div class="player">
+        <video id="video" playsinline preload="metadata" poster="organiza-thumbnail.jpg" width="1280" height="720" aria-label="Vídeo: como o cadastro de produtos afeta o lucro e como a Organiza pode ajudar. Com legendas na imagem.">
+          <source src="organiza-video-web.mp4" type="video/mp4">
+          Seu navegador não reproduz este vídeo. <a href="organiza-video-web.mp4">Baixe o vídeo aqui</a>.
+        </video>
+        <button class="play" id="play" type="button" aria-label="Assistir ao vídeo, 2 minutos e 45 segundos"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>Assistir · 2:45</span></button>
+        <div class="player-end" id="playerEnd">
+          <p>Descubra como a Organiza pode ajudar sua empresa.</p>
+          <a class="btn" data-wa href="#">FALAR COM UM ESPECIALISTA</a>
+          <button class="replay" id="replay" type="button">Assistir de novo</button>
+        </div>
+      </div>
+      <div class="cta-row" id="heroCta">
+        <a class="btn" data-wa href="#">FALAR COM UM ESPECIALISTA</a>
+        <a class="btn btn-line" href="#smarttax">Ver o SmartTax rodando</a>
+      </div>
+      <p class="hint">A conversa acontece direto pelo WhatsApp, com o time comercial.</p>
+    </div>
+  </section>
+
+  <section class="proof" data-theme="navy">
+    <div class="wrap" data-reveal>
+      <span class="big" id="count" data-to="1882">1.882</span>
+      <h2>de 1.883 produtos analisados em um posto tinham ao menos uma divergência no cadastro.</h2>
+      <div class="meter" id="meter" role="img" aria-label="1.882 de 1.883 produtos com divergência"><i></i></div>
+      <div class="meter-note"><span>Com divergência: 1.882</span><span>Sem divergência: 1</span></div>
+      <p class="source">Caso real apresentado pela Organiza, com a análise antes e depois de um cliente. Os resultados variam conforme cada empresa.</p>
+    </div>
+  </section>
+
+  <section id="simulador" data-theme="purple">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <h2>Centavos por venda viram <em>milhares em 5 anos</em></h2>
+        <p>Escolha um exemplo apresentado pela Organiza ou ajuste os valores para o seu caso.</p>
+      </div>
+      <div class="sim" data-reveal>
+        <div class="panel">
+          <div class="presets" role="group" aria-label="Exemplos">
+            <button class="chip" type="button" data-cost="0.55" data-qty="350" aria-pressed="true">Refrigerante</button>
+            <button class="chip" type="button" data-cost="2.34" data-qty="150" aria-pressed="false">Energético</button>
+            <button class="chip" type="button" data-cost="1.70" data-qty="100" aria-pressed="false">Chocolate</button>
+          </div>
+          <div class="field">
+            <label for="cost">Prejuízo por venda <output id="costOut" for="cost"></output></label>
+            <input id="cost" type="range" min="0.05" max="3" step="0.01" value="0.55">
+          </div>
+          <div class="field">
+            <label for="qty">Unidades vendidas por mês <output id="qtyOut" for="qty"></output></label>
+            <input id="qty" type="range" min="10" max="1000" step="10" value="350">
+          </div>
+        </div>
+        <div class="panel result">
+          <small>Em 5 anos, em um único produto</small>
+          <strong id="total" aria-live="polite">R$ 11.550,00</strong>
+          <small id="perMonth"></small>
+          <a class="btn" data-wa href="#">Quero analisar meu cadastro</a>
+        </div>
+      </div>
+      <p class="disclaimer">Simulação ilustrativa: prejuízo por venda × unidades por mês × 60 meses. Não é um diagnóstico da sua empresa nem promessa de economia.</p>
+    </div>
+  </section>
+
+  <section id="smarttax" data-theme="lilac">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <h2>O <em>SmartTax</em> rodando no ERP</h2>
+        <p>É a solução da Organiza que analisa o cadastro de produtos e sugere os dados tributários, sem exportar planilhas nem corrigir produto por produto.</p>
+      </div>
+      <div class="demo">
+        <div class="window" data-reveal>
+          <div class="window-top"><i></i><i></i><i></i>Demonstração real em um ERP integrado</div>
+          <img src="smarttax-demo.gif" width="720" height="461" loading="lazy" alt="Demonstração do SmartTax no ERP: os produtos são selecionados, o sistema consulta as atualizações e exibe a mensagem de busca efetuada com sucesso.">
+        </div>
+        <ol class="steps" data-reveal>
+          <li><h3>Você clica no ERP</h3><p>Selecione os produtos e busque a atualização no seu sistema.</p></li>
+          <li><h3>A Organiza analisa</h3><p>Os produtos são enviados e analisados em tempo real.</p></li>
+          <li><h3>Você salva</h3><p>Os dados tributários voltam e o cadastro fica atualizado.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparar" data-theme="white">
+    <div class="wrap">
+      <div class="head" data-reveal><h2>O que muda na sua rotina</h2></div>
+      <div data-reveal>
+        <div class="switch" role="tablist" aria-label="Comparação" data-tabs="routine">
+          <button type="button" role="tab" id="t-sem" aria-controls="routine" aria-selected="false" data-key="sem">Sem SmartTax</button>
+          <button type="button" role="tab" id="t-com" aria-controls="routine" aria-selected="true" data-key="com">Com SmartTax</button>
+        </div>
+        <ul class="cards" id="routine" role="tabpanel" aria-live="polite"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="pink">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <h2>Quais dados são analisados</h2>
+        <p>Informações fiscais que definem como cada produto é tributado.</p>
+      </div>
+      <div data-reveal>
+        <div class="switch" role="tablist" aria-label="Esfera" data-tabs="fields">
+          <button type="button" role="tab" id="t-est" aria-controls="fields" aria-selected="true" data-key="estadual">Estadual</button>
+          <button type="button" role="tab" id="t-fed" aria-controls="fields" aria-selected="false" data-key="federal">Federal</button>
+        </div>
+        <ul class="tags" id="fields" role="tabpanel" aria-live="polite"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="navy">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <h2>Por que olhar para isso <em>agora</em></h2>
+        <p>A Reforma Tributária aumenta a importância de um cadastro correto.</p>
+      </div>
+      <ul class="cards" data-reveal>
+        <li><h3>A transição já começou</h3><p>A Reforma Tributária já traz mudanças para as notas fiscais e segue em transição até 2033.</p></li>
+        <li><h3>Mais campos por produto</h3><p>Além das informações atuais, a reforma exige novos dados, como cClassTrib e as alíquotas de IBS e CBS.</p></li>
+        <li><h3>Erro mais perto do caixa</h3><p>O split payment, previsto na reforma, reterá o imposto na venda. A implantação ainda está em definição.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="perguntas" data-theme="lilac">
+    <div class="wrap">
+      <div class="head center" data-reveal><h2>Perguntas frequentes</h2></div>
+      <div class="faq" data-reveal>
+        <details open><summary>O SmartTax funciona com o meu ERP?</summary><p>Ele funciona integrado ao sistema de gestão. Fale com um especialista para confirmar a disponibilidade no ERP que você usa.</p></details>
+        <details><summary>Com que frequência devo buscar atualizações?</summary><p>A recomendação da Organiza é buscar toda semana e também no primeiro dia de cada mês.</p></details>
+        <details><summary>E os produtos sem padrão nacional?</summary><p>Eles seguem para a equipe técnica da Organiza. Podem não voltar na primeira atualização e retornam nas seguintes, conforme a análise é concluída.</p></details>
+        <details><summary>Existe garantia de economia?</summary><p>Não. O SmartTax analisa e sugere os dados tributários, e o resultado depende da situação do cadastro de cada empresa.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" data-theme="pink">
+    <div class="wrap" data-reveal>
+      <h2>Descubra como a Organiza pode ajudar sua empresa.</h2>
+      <p>Converse com um especialista e entenda como o SmartTax se aplica à sua operação.</p>
+      <a class="btn" data-wa href="#">FALAR COM UM ESPECIALISTA</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="logo" role="img" aria-label="Organiza"><use href="#logo"/></svg>
+    <span><a href="mailto:contato@organiza.site">contato@organiza.site</a> · <a href="https://organiza.site">organiza.site</a></span>
+    <span>© Organiza. CNPJ 54.628.376/0001-74</span>
+  </div>
+</footer>
+
+<div class="sticky"><a class="btn" data-wa href="#">FALAR COM UM ESPECIALISTA</a></div>
+
+<script>
+  // Contato comercial: mesmo WhatsApp dos botões de organiza.site
+  const WHATSAPP = "554731704058";
+  const MESSAGE = "Olá, vim da página do SmartTax. Quero falar com um especialista.";
+  document.querySelectorAll("[data-wa]").forEach((link) => {
+    link.href = `https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(MESSAGE)}`;
+    link.target = "_blank";
+    link.rel = "noopener";
+  });
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const brl = (n) => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+  // Vídeo
+  const video = document.getElementById("video");
+  const play = document.getElementById("play");
+  const end = document.getElementById("playerEnd");
+  play.addEventListener("click", () => { video.controls = true; play.hidden = true; video.play(); });
+  video.addEventListener("ended", () => end.classList.add("show"));
+  document.getElementById("replay").addEventListener("click", () => { end.classList.remove("show"); video.currentTime = 0; video.play(); });
+
+  // Cor da página conforme a seção no centro da tela
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const sections = [...document.querySelectorAll("section[data-theme]")];
+  const updateTheme = () => {
+    const mid = innerHeight / 2;
+    const current = sections.find((s) => { const r = s.getBoundingClientRect(); return r.top <= mid && r.bottom > mid; });
+    if (!current || document.body.dataset.theme === current.dataset.theme) return;
+    document.body.dataset.theme = current.dataset.theme;
+    themeColor.content = getComputedStyle(document.body).getPropertyValue("--bg").trim();
+  };
+
+  // Entrada dos blocos
+  const revealObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("in"); obs.unobserve(entry.target); } });
+  }, { rootMargin: "0px 0px -10% 0px" });
+  document.querySelectorAll("[data-reveal]").forEach((el) => revealObserver.observe(el));
+
+  // Barra de progresso
+  const progress = document.getElementById("progress");
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.setProperty("--p", max > 0 ? scrollY / max : 0);
+    updateTheme();
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+  onScroll();
+
+  // Contador do caso real
+  const count = document.getElementById("count");
+  const meter = document.getElementById("meter");
+  new IntersectionObserver((entries, obs) => {
+    if (!entries[0].isIntersecting) return;
+    obs.disconnect();
+    meter.classList.add("on");
+    if (reduced) return;
+    const to = +count.dataset.to, t0 = performance.now(), ms = 1600;
+    const step = (t) => {
+      const p = Math.min(1, (t - t0) / ms), v = Math.round(to * (1 - (1 - p) ** 3));
+      count.textContent = v.toLocaleString("pt-BR");
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, { threshold: .4 }).observe(count);
+
+  // Simulador
+  const cost = document.getElementById("cost"), qty = document.getElementById("qty");
+  const chips = document.querySelectorAll(".chip");
+  const calc = () => {
+    const c = +cost.value, q = +qty.value;
+    document.getElementById("costOut").textContent = brl(c);
+    document.getElementById("qtyOut").textContent = q.toLocaleString("pt-BR");
+    document.getElementById("total").textContent = brl(c * q * 60);
+    document.getElementById("perMonth").textContent = `${brl(c * q)} por mês`;
+  };
+  [cost, qty].forEach((input) => input.addEventListener("input", () => {
+    chips.forEach((chip) => chip.setAttribute("aria-pressed", String(+chip.dataset.cost === +cost.value && +chip.dataset.qty === +qty.value)));
+    calc();
+  }));
+  chips.forEach((chip) => chip.addEventListener("click", () => {
+    cost.value = chip.dataset.cost; qty.value = chip.dataset.qty;
+    chips.forEach((other) => other.setAttribute("aria-pressed", String(other === chip)));
+    calc();
+  }));
+  calc();
+
+  // Abas
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const CONTENT = {
+    routine: {
+      sem: [["Cadastro na correria", "Caixa ou gerente lança o produto às pressas."], ["Dados copiados da nota", "O cadastro replica a nota de compra do fornecedor."], ["Correção manual", "Cada produto precisa ser revisado um a um."],
+            ["Legislação por sua conta", "Mudanças saem em diários oficiais com centenas de páginas."], ["Produtos regionais", "Itens sem padrão nacional ficam sem referência."], ["Dúvida a cada novidade", "Produto novo chega e ninguém sabe como cadastrar."]],
+      com: [["Sugere dados tributários", "Indica as informações fiscais de cada produto cadastrado."], ["Alerta inconsistências", "Sinaliza o que foi encontrado de divergente no cadastro."], ["Um clique no ERP", "A análise funciona dentro do sistema que você já usa."],
+            ["Acompanha a legislação", "Uma equipe acompanha as mudanças publicadas nos diários oficiais."], ["Analisa produtos regionais", "Itens sem padrão nacional passam pela equipe técnica."], ["Ajuda com produtos novos", "O suporte auxilia no cadastro fiscal."]],
+    },
+    fields: {
+      estadual: ["CFOP", "cBenef", "FCP", "Isenção de ICMS", "Redução da base de cálculo do ICMS", "Alíquota do ICMS", "CST"],
+      federal: ["CST de saída", "Alíquota de PIS/Pasep", "Alíquota de COFINS"],
+    },
+  };
+  const paint = (panel, key, items) => {
+    const list = CONTENT[key][items];
+    panel.innerHTML = list.map((i) => Array.isArray(i) ? `<li><h3>${esc(i[0])}</h3><p>${esc(i[1])}</p></li>` : `<li>${esc(i)}</li>`).join("");
+    panel.classList.remove("pop"); void panel.offsetWidth; panel.classList.add("pop");
+  };
+  document.querySelectorAll("[data-tabs]").forEach((tabs) => {
+    const key = tabs.dataset.tabs, panel = document.getElementById(key), buttons = [...tabs.querySelectorAll("button")];
+    const select = (btn) => {
+      buttons.forEach((b) => { b.setAttribute("aria-selected", String(b === btn)); b.tabIndex = b === btn ? 0 : -1; });
+      panel.setAttribute("aria-labelledby", btn.id);
+      paint(panel, key, btn.dataset.key);
+    };
+    buttons.forEach((b, i) => {
+      b.addEventListener("click", () => select(b));
+      b.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const next = buttons[(i + (e.key === "ArrowRight" ? 1 : buttons.length - 1)) % buttons.length];
+        next.focus(); select(next);
+      });
+    });
+    select(buttons.find((b) => b.getAttribute("aria-selected") === "true"));
+  });
+
+  // Barra fixa só entre o botão do topo e o CTA final
+  const heroCta = document.getElementById("heroCta");
+  const finalCta = document.querySelector(".final");
+  let pastHero = false, atFinal = false;
+  const sync = () => document.body.classList.toggle("show-sticky", pastHero && !atFinal);
+  new IntersectionObserver(([entry]) => { pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0; sync(); }).observe(heroCta);
+  new IntersectionObserver(([entry]) => { atFinal = entry.isIntersecting; sync(); }).observe(finalCta);
+</script>
+</body>
+</html>
